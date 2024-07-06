@@ -74,7 +74,7 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Trajan Pro
+    - family: SF Pro Display
       fonts:
         - asset: assets/fonts/sf_pro_display_bold.ttf
           weight: 700
