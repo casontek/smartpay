@@ -16,7 +16,8 @@ final lightTheme = ThemeData(
         surface: lightColorScheme.surface,
         onSurface: lightColorScheme.onSurface,
         surfaceTint: lightColorScheme.surfaceTint,
-        outline: lightColorScheme.outline
+        outline: lightColorScheme.outline,
+        outlineVariant: lightColorScheme.outlineVariant
     )
 );
 

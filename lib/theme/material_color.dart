@@ -10,6 +10,7 @@ const lightColorScheme = ColorScheme.light(
     surfaceTint: Color(0XFFF9FAFB),
     secondary: Color(0XFF0A6375),
     outline: Color(0XFFE5E7EB),
+    outlineVariant: Color(0XFF2FA2B9),
     error: Colors.red,
     onError: Colors.white
 );

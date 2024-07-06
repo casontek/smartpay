@@ -138,7 +138,7 @@ class _OnBoardingScreen extends State<OnBoardingScreen> {
                           );
                         }
                     )
-                  ],
+                  ]
                 )
             )
           ],
