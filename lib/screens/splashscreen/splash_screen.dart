@@ -1,5 +1,9 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smartpaymobile/bloc/splash_bloc/splash_bloc.dart';
+import 'package:smartpaymobile/bloc/splash_bloc/splash_state.dart';
+import 'package:smartpaymobile/screens/auth/sign_in_screen.dart';
 import 'package:smartpaymobile/screens/onboarding/onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -13,59 +17,71 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreen extends State<SplashScreen> {
 
   @override
-  void initState() {
-    super.initState();
-    Future.delayed(
-        const Duration(seconds: 15), 
-        () => Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const OnBoardingScreen())
+  Widget build(BuildContext context) {
+    return Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        body: BlocProvider(
+            create: (context) => SplashBloc(),
+            child: BlocConsumer<SplashBloc, SplashState>(
+                listener: (context, state) {
+                  if(state.appState == AppState.onBoarded) {
+                    navigate(true);
+                  }
+                  else if(state.appState == AppState.notOnBoarded) {
+                    navigate(false);
+                  }
+                },
+                builder: (context, state) {
+                  return Center(
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                                'assets/images/smartpay_logo.png',
+                                fit: BoxFit.contain,
+                                height: 72,
+                                width: 72
+                            ),
+                            const SizedBox(height: 16.0),
+                            Text.rich(
+                                TextSpan(
+                                    children: [
+                                      TextSpan(
+                                          text: 'Smart',
+                                          style: TextStyle(
+                                              color: Theme.of(context).colorScheme.primary,
+                                              fontFamily: 'SF Pro Display',
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 32
+                                          )
+                                      ),
+                                      TextSpan(
+                                        text: 'Pay.',
+                                        style: TextStyle(
+                                          color: Theme.of(context).colorScheme.secondary,
+                                          fontFamily: 'SF Pro Display',
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 32,
+                                        ),
+                                      ),
+                                    ]
+                                )
+                            )
+                          ]
+                      )
+                  );
+                }
+            )
         )
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.surface,
-        body: Center(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                    'assets/images/smartpay_logo.png',
-                    fit: BoxFit.contain,
-                    height: 72,
-                    width: 72
-                ),
-                const SizedBox(height: 16.0),
-                Text.rich(
-                    TextSpan(
-                        children: [
-                          TextSpan(
-                              text: 'Smart',
-                              style: TextStyle(
-                                  color: Theme.of(context).colorScheme.primary,
-                                  fontFamily: 'SF Pro Display',
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 32
-                              )
-                          ),
-                          TextSpan(
-                            text: 'Pay.',
-                            style: TextStyle(
-                              color: Theme.of(context).colorScheme.secondary,
-                              fontFamily: 'SF Pro Display',
-                              fontWeight: FontWeight.w600,
-                              fontSize: 32,
-                            ),
-                          ),
-                        ]
-                    )
-                )
-              ]
-          )
-        )
+  void navigate(bool onBoarded) {
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) => onBoarded ? const SignInScreen() :
+            const OnBoardingScreen())
     );
   }
 

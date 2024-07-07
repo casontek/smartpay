@@ -138,7 +138,9 @@ class _OtpVerificationScreen extends State<OtpVerificationScreen> {
                     customButtonWidget(
                         label: 'Confirm',
                         context: context,
-                        onClick: () {}
+                        onClick: () {
+
+                        }
                     ),
                     const SizedBox(height: 36.0),
                     Wrap(
