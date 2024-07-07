@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:smartpaymobile/screens/auth/forgot_password_screen.dart';
 import 'package:smartpaymobile/screens/auth/sign_up_screen.dart';
 import 'package:smartpaymobile/widgets/custom_button_widget.dart';
 import 'package:smartpaymobile/widgets/custom_single_text_widget.dart';
@@ -28,21 +29,27 @@ class _SignInScreen extends State<SignInScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      width: 40.0,
-                      height: 40.0,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12.0),
-                          border: Border.fromBorderSide(BorderSide(
-                              color: Theme.of(context).colorScheme.outline,
-                              width: 1.0
-                          ))
-                      ),
-                      child: Icon(
-                          Icons.arrow_back_ios_rounded,
-                          color: Theme.of(context).colorScheme.primary
-                      ),
+                    Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: GestureDetector(
+                            onTap: () => Navigator.pop(context),
+                            child: Container(
+                              width: 40.0,
+                              height: 40.0,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                  border: Border.fromBorderSide(BorderSide(
+                                      color: Theme.of(context).colorScheme.outline,
+                                      width: 1.0
+                                  ))
+                              ),
+                              child: Icon(
+                                  Icons.arrow_back_ios_rounded,
+                                  color: Theme.of(context).colorScheme.primary
+                              ),
+                            )
+                        )
                     ),
                     const SizedBox(height: 24.0),
                     customSingleTextWidget(
@@ -140,7 +147,12 @@ class _SignInScreen extends State<SignInScreen> {
                     customButtonWidget(
                         label: 'Sign In',
                         context: context,
-                        onClick: () {}
+                        onClick: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const ForgotPasswordScreen())
+                          );
+                        }
                     ),
                     Padding(
                         padding: const EdgeInsets.only(top: 32.0, bottom: 24.0),

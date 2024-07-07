@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:smartpaymobile/screens/auth/otp_verification_screen.dart';
 import 'package:smartpaymobile/screens/auth/sign_in_screen.dart';
 
 import '../../widgets/custom_button_widget.dart';
@@ -29,21 +30,27 @@ class _SignUpScreen extends State<SignUpScreen> {
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          width: 40.0,
-                          height: 40.0,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12.0),
-                              border: Border.fromBorderSide(BorderSide(
-                                  color: Theme.of(context).colorScheme.outline,
-                                  width: 1.0
-                              ))
-                          ),
-                          child: Icon(
-                              Icons.arrow_back_ios_rounded,
-                              color: Theme.of(context).colorScheme.primary
-                          ),
+                        Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: GestureDetector(
+                                onTap: () => Navigator.pop(context),
+                                child: Container(
+                                  width: 40.0,
+                                  height: 40.0,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12.0),
+                                      border: Border.fromBorderSide(BorderSide(
+                                          color: Theme.of(context).colorScheme.outline,
+                                          width: 1.0
+                                      ))
+                                  ),
+                                  child: Icon(
+                                      Icons.arrow_back_ios_rounded,
+                                      color: Theme.of(context).colorScheme.primary
+                                  ),
+                                )
+                            )
                         ),
                         const SizedBox(height: 24.0),
                         Text.rich(
@@ -114,7 +121,12 @@ class _SignUpScreen extends State<SignUpScreen> {
                         customButtonWidget(
                             label: 'Sign Up',
                             context: context,
-                            onClick: () {}
+                            onClick: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const OtpVerificationScreen())
+                              );
+                            }
                         ),
                         Padding(
                             padding: const EdgeInsets.only(top: 32.0, bottom: 24.0),

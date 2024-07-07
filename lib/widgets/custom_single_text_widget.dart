@@ -20,3 +20,24 @@ Widget customSingleTextWidget({
     overflow: TextOverflow.ellipsis,
   );
 }
+
+
+Widget customMultiLineTextWidget({
+  required String label,
+  required double size,
+  required FontWeight weight,
+  required Color textColor
+}) {
+  return Text(
+    label,
+    style: TextStyle(
+        fontSize: size,
+        fontFamily: 'SF Pro Display',
+        fontWeight: weight,
+        color: textColor
+    ),
+    maxLines: 2,
+    textAlign: TextAlign.start,
+    overflow: TextOverflow.ellipsis,
+  );
+}
