@@ -4,6 +4,8 @@ import 'package:smartpaymobile/screens/auth/sign_in_screen.dart';
 import 'package:smartpaymobile/widgets/custom_button_widget.dart';
 import 'package:smartpaymobile/widgets/text_button_widget.dart';
 
+import '../../services/sqlite_service.dart';
+
 class OnBoardingScreen extends StatefulWidget {
 
   const OnBoardingScreen({super.key});
@@ -14,6 +16,7 @@ class OnBoardingScreen extends StatefulWidget {
 }
 
 class _OnBoardingScreen extends State<OnBoardingScreen> {
+  final sqlService = SQLiteService();
   late PageController _pageController;
   int _currentPageIndex = 0;
   final _onBoardingImages = [
@@ -48,7 +51,7 @@ class _OnBoardingScreen extends State<OnBoardingScreen> {
               child: textButtonWidget(
                   label: 'Skip',
                   context: context,
-                  onClick: () {}
+                  onClick: () => navigate()
               )
             ),
             Expanded(
@@ -131,12 +134,7 @@ class _OnBoardingScreen extends State<OnBoardingScreen> {
                     customButtonWidget(
                         label: 'Get Started',
                         context: context,
-                        onClick: () {
-                          Navigator.pushReplacement(
-                              context,
-                            MaterialPageRoute(builder: (context) => const SignInScreen())
-                          );
-                        }
+                        onClick: () => navigate()
                     )
                   ]
                 )
@@ -165,6 +163,17 @@ class _OnBoardingScreen extends State<OnBoardingScreen> {
         curve: Curves.ease,
       );
     }
+  }
+
+  Future<void> navigate() async {
+    //catch onboarded information into db
+    await sqlService.onBoarded(true);
+
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) => const SignInScreen())
+    );
   }
 
 }

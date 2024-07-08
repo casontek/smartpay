@@ -4,9 +4,7 @@ import 'package:equatable/equatable.dart';
 class SplashState extends Equatable {
   final AppState appState;
 
-  const SplashState({
-    this.appState = AppState.loading
-  });
+  const SplashState({this.appState = AppState.loading});
 
   SplashState copyWith({
     AppState? appState

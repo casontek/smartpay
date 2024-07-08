@@ -139,10 +139,6 @@ class _VerifyIdentityScreen extends State<VerifyIdentityScreen> {
                       label: 'Continue',
                       context: context,
                       onClick: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => const IdFillScreen())
-                        );
                       }
                   )
               )

@@ -31,6 +31,9 @@ class SQLiteService {
 
   Future<void> saveUser(User user) async {
     try {
+      if(!hasInitialized) {
+        await initializeDB();
+      }
         await _db.insert(
             'User',
             user.toJson(),
@@ -44,6 +47,9 @@ class SQLiteService {
 
   Future<void> saveToken(String token) async {
     try {
+      if(!hasInitialized) {
+        await initializeDB();
+      }
         await _db.insert(
             'UserToken',
             {'token': token},
@@ -56,14 +62,21 @@ class SQLiteService {
   }
 
   Future<void> onBoarded(bool boarded) async {
+    print('@@@@@@@@@@@@@@@@@@ Saving onboard information...');
+    if(!hasInitialized) {
+      await initializeDB();
+    }
     await _db.insert(
       'OnBoarding',
-      {'boarded': 1},
+      {'onBoarded': 1},
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
 
   Future<bool?> isOnBoarded() async {
+    if(!hasInitialized) {
+      await initializeDB();
+    }
     List<Map<String, dynamic>> result = await _db.query('OnBoarding');
     if (result.isNotEmpty) {
       return result.first['boarded'] == 1;
@@ -72,6 +85,9 @@ class SQLiteService {
   }
 
   Future<User?> getUser() async {
+    if(!hasInitialized) {
+      await initializeDB();
+    }
       final user = await _db.query('User');
       if(user.isNotEmpty) {
         return User.fromJson(user.first);
@@ -82,6 +98,9 @@ class SQLiteService {
   }
 
   Future<String?> getToken() async {
+    if(!hasInitialized) {
+      await initializeDB();
+    }
     List<Map<String, dynamic>> token = await _db.query('UserToken');
       if(token.isNotEmpty) {
         return token.first['token'];

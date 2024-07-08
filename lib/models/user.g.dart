@@ -12,9 +12,9 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       json['email'] as String,
       json['country'] as String,
       json['id'] as String,
-      json['phone'] as String,
-      json['phone_country'] as String,
-      json['avatar'] as String,
+      json['phone'] as String?,
+      json['phone_country'] as String?,
+      json['avatar'] as String?,
     );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{

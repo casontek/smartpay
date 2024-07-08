@@ -23,34 +23,39 @@ class SmartpayApiClientService {
           },
           body: jsonEncode(body)
       );
-
       if(response.statusCode == 200) {
         final responseData = jsonDecode(response.body) as Map;
         final message = responseData['message'] as String;
-
         if(message == 'success') {
           final data = responseData['data'] as Map<String, dynamic>;
           final tokenResponse = TokenResponse.fromJson(data);
 
           return Result(
               message,
-              Status.success,
+              NetworkStatus.success,
               tokenResponse
           );
         }
         else {
-          final message = responseData['message'] as String?;
           return Result(
-              message ?? 'failed.',
-              Status.failed,
+              message,
+              NetworkStatus.failed,
               null
           );
         }
       }
       else {
+        String error;
+        try {
+          final errorData = jsonDecode(response.body) as Map;
+          error = errorData['message'] as String;
+        }
+        catch(e) {
+          error = 'Request failed. try again!';
+        }
         return Result(
-            'request failed.',
-            Status.failed,
+            error,
+            NetworkStatus.failed,
             null
         );
       }
@@ -58,7 +63,7 @@ class SmartpayApiClientService {
     catch(e) {
       return Result(
           'Network issue. try again!',
-          Status.timeout,
+          NetworkStatus.timeout,
           null
       );
     }
@@ -84,23 +89,30 @@ class SmartpayApiClientService {
 
           return Result(
               message,
-              Status.success,
+              NetworkStatus.success,
               emailResponse
           );
         }
         else {
-          final message = responseData['message'] as String?;
           return Result(
-              message ?? 'failed.',
-              Status.failed,
+              message,
+              NetworkStatus.failed,
               null
           );
         }
       }
       else {
+        String error;
+        try {
+          final errorData = jsonDecode(response.body) as Map;
+          error = errorData['message'] as String;
+        }
+        catch(e) {
+          error = 'Request failed. try again!';
+        }
         return Result(
-            'request failed.',
-            Status.failed,
+            error,
+            NetworkStatus.failed,
             null
         );
       }
@@ -108,7 +120,7 @@ class SmartpayApiClientService {
     catch(e) {
       return Result(
           'Network issue. try again!',
-          Status.timeout,
+          NetworkStatus.timeout,
           null
       );
     }
@@ -134,31 +146,39 @@ class SmartpayApiClientService {
 
           return Result(
               message,
-              Status.success,
+              NetworkStatus.success,
               response
           );
         }
         else {
-          final message = responseData['message'] as String?;
           return Result(
               message ?? 'failed.',
-              Status.failed,
+              NetworkStatus.failed,
               null
           );
         }
       }
       else {
+        String error;
+        try {
+          final errorData = jsonDecode(response.body) as Map;
+          error = errorData['message'] as String;
+        }
+        catch(e) {
+          error = 'Request failed. try again!';
+        }
         return Result(
-            'request failed.',
-            Status.failed,
+            error,
+            NetworkStatus.failed,
             null
         );
       }
     }
     catch(e) {
+      print('@@@@@@@@@@@@@@@@@@@@@@@@ Error: $e');
       return Result(
           'Network issue. try again!',
-          Status.timeout,
+          NetworkStatus.timeout,
           null
       );
     }
@@ -174,6 +194,8 @@ class SmartpayApiClientService {
           body: jsonEncode(body)
       );
 
+      print('@@@@@@@@@@@@@@@@@@@@@@@@@@@ Login Result: ${response.body}');
+
       if(response.statusCode == 200) {
         final responseData = jsonDecode(response.body) as Map;
         final message = responseData['message'] as String;
@@ -184,7 +206,7 @@ class SmartpayApiClientService {
 
           return Result(
               message,
-              Status.success,
+              NetworkStatus.success,
               response
           );
         }
@@ -192,15 +214,23 @@ class SmartpayApiClientService {
           final message = responseData['message'] as String?;
           return Result(
               message ?? 'failed.',
-              Status.failed,
+              NetworkStatus.failed,
               null
           );
         }
       }
       else {
+        String error;
+        try {
+          final errorData = jsonDecode(response.body) as Map;
+          error = errorData['message'] as String;
+        }
+        catch(e) {
+          error = 'Request failed. try again!';
+        }
         return Result(
-            'request failed.',
-            Status.failed,
+            error,
+            NetworkStatus.failed,
             null
         );
       }
@@ -208,7 +238,7 @@ class SmartpayApiClientService {
     catch(e) {
       return Result(
           'Network issue. try again!',
-          Status.timeout,
+          NetworkStatus.timeout,
           null
       );
     }

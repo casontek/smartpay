@@ -9,12 +9,12 @@ class User {
   final String name;
   final String? username;
   final String email;
-  final String phone;
+  final String? phone;
   final String country;
   @JsonKey(name: 'phone_country')
-  final String phoneCountry;
+  final String? phoneCountry;
   final String id;
-  final String avatar;
+  final String? avatar;
 
   User(
       this.name,

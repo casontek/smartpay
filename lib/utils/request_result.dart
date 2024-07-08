@@ -1,7 +1,7 @@
 
 class Result<T> {
   final String message;
-  final Status status;
+  final NetworkStatus status;
   final T? data;
 
   Result(
@@ -11,7 +11,7 @@ class Result<T> {
       );
 }
 
-enum Status {
+enum NetworkStatus {
   success,
   failed,
   timeout
