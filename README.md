@@ -1,6 +1,10 @@
 # smartpaymobile
 
-apexnetwork challenge app
+ApexNetwork challenge app
+
+# NOTE:
+The code base was designed in a code explanatory manner, 
+there little or no code commenting at this time because of time of delivery.
 
 ## Getting Started
 
