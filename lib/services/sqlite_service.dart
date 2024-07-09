@@ -20,8 +20,8 @@ class SQLiteService {
     return openDatabase(
         join(path, 'smartpay.db'),
         onCreate: (db, version) async {
-          await db.execute("CREATE TABLE User(id TEXT PRIMARY KEY, name TEXT, "
-              "email TEXT, country TEXT, phone TEXT, username TEXT, avatar TEXT)");
+          await db.execute("CREATE TABLE User(id TEXT PRIMARY KEY, full_name TEXT, "
+              "email TEXT, country TEXT, phone TEXT, username TEXT, avatar TEXT, phone_country TEXT)");
           await db.execute("CREATE TABLE UserToken(token TEXT)");
           await db.execute("CREATE TABLE OnBoarding(onBoarded BOOLEAN)");
           await db.execute("CREATE TABLE UserPin(pin TEXT)");

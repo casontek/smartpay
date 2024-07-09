@@ -127,7 +127,9 @@ class _OnBoardingScreen extends State<OnBoardingScreen> {
                             controller: _pageController,
                             effect: ExpandingDotsEffect(
                               activeDotColor: Theme.of(context).colorScheme.primary,
-                              dotColor: const Color(0XFFE5E7EB)
+                              dotColor: const Color(0XFFE5E7EB),
+                              dotHeight: 6.0,
+                              dotWidth: 12.0
                             ),
                             count: 2
                         )
