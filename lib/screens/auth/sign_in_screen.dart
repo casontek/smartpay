@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smartpaymobile/bloc/login_bloc/login_bloc.dart';
 import 'package:smartpaymobile/bloc/login_bloc/login_event.dart';
@@ -29,6 +30,11 @@ class _SignInScreen extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+            statusBarColor: Theme.of(context).colorScheme.surface,
+            statusBarIconBrightness: Brightness.dark
+        ));
     return BlocProvider(
         create: (context) => LoginBloc(),
         child: BlocConsumer<LoginBloc, LoginState>(

@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:smartpaymobile/models/user.dart';
 import 'package:smartpaymobile/widgets/custom_button_widget.dart';
 
@@ -23,6 +24,11 @@ class _HomeScreen extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+        statusBarColor: Theme.of(context).colorScheme.surface,
+        statusBarIconBrightness: Brightness.dark
+    ));
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(

@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smartpaymobile/bloc/create_pin/pin_bloc.dart';
 import 'package:smartpaymobile/bloc/otp_verification_bloc/otp_verify_state.dart';
@@ -27,6 +28,11 @@ class _CreatePinScreen extends State<CreatePinScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+            statusBarColor: Theme.of(context).colorScheme.surface,
+            statusBarIconBrightness: Brightness.dark
+        ));
     return BlocProvider(
         create: (context) => PinBloc(),
         child: Scaffold(

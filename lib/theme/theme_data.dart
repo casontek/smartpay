@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'material_color.dart';
 
 final lightTheme = ThemeData(
@@ -18,6 +19,12 @@ final lightTheme = ThemeData(
         surfaceTint: lightColorScheme.surfaceTint,
         outline: lightColorScheme.outline,
         outlineVariant: lightColorScheme.outlineVariant
+    ),
+    appBarTheme: AppBarTheme(
+      systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: lightColorScheme.surface,
+          statusBarIconBrightness: Brightness.dark
+      )
     )
 );
 

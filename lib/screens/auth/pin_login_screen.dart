@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smartpaymobile/screens/home/home_screen.dart';
 import 'package:smartpaymobile/utils/constants.dart';
@@ -26,6 +27,11 @@ class _PinLoginScreen extends State<PinLoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+            statusBarColor: Theme.of(context).colorScheme.surface,
+            statusBarIconBrightness: Brightness.dark
+        ));
     return BlocProvider(
         create: (context) => PinBloc(),
         child: Scaffold(
@@ -58,7 +64,7 @@ class _PinLoginScreen extends State<PinLoginScreen> {
                             Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  const SizedBox(height: 24.0),
+                                  const SizedBox(height: 68.0),
                                   customSingleTextWidget(
                                       label: 'Welcome Back',
                                       size: 24,

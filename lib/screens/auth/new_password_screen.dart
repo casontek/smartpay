@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../widgets/custom_button_widget.dart';
 import '../../widgets/custom_single_text_widget.dart';
@@ -18,6 +19,11 @@ class _NewPasswordScreen extends State<NewPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+            statusBarColor: Theme.of(context).colorScheme.surface,
+            statusBarIconBrightness: Brightness.dark
+        ));
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(

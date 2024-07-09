@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smartpaymobile/bloc/splash_bloc/splash_bloc.dart';
 import 'package:smartpaymobile/bloc/splash_bloc/splash_event.dart';
@@ -40,6 +41,11 @@ class _SplashScreen extends State<ProviderSplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+            statusBarColor: Theme.of(context).colorScheme.surface,
+            statusBarIconBrightness: Brightness.dark
+        ));
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.surface,
         body: BlocConsumer<SplashBloc, SplashState>(
