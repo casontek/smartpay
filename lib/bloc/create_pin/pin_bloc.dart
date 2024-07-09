@@ -70,7 +70,13 @@ class PinBloc extends Bloc<OtpVerifyEvent, OtpVerifyState> {
       emit(state.copyWith(status: Status.loading));
       String concatenatedPIN = state.otpCodes.values.join('');
       print('@@@@@@@@@@@@@@@@ MY PIN: $concatenatedPIN');
-      await sqlService.savePIN(concatenatedPIN);
+      try {
+        await sqlService.savePIN(concatenatedPIN);
+        emit(state.copyWith(status: Status.success));
+      }
+      catch(e) {
+        emit(state.copyWith(status: Status.failed));
+      }
     });
 
     on<PinLogin>((event, emit) async {

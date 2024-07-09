@@ -62,7 +62,12 @@ class _IdFillScreen extends State<IdFillScreen> {
                   );
                   Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => CreatePinScreen(user: state.user!, token: state.token))
+                      MaterialPageRoute(builder: (context) =>
+                          CreatePinScreen(
+                              user: state.user!,
+                              token: state.token,
+                            fromLogin: false
+                          ))
                   );
                 }
               },

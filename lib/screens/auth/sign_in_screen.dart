@@ -64,7 +64,8 @@ class _SignInScreen extends State<SignInScreen> {
                     MaterialPageRoute(builder: (context) =>
                         CreatePinScreen(
                             user: state.user!,
-                            token: state.token
+                            token: state.token,
+                            fromLogin: true,
                         )));
               }
             },

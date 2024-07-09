@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:smartpaymobile/screens/auth/pin_login_screen.dart';
 import 'package:smartpaymobile/screens/auth/sign_in_screen.dart';
 
 import '../../widgets/custom_button_widget.dart';
@@ -8,8 +9,13 @@ import '../../widgets/custom_single_text_widget.dart';
 
 class OnboardFinish extends StatefulWidget {
   final String username;
+  final bool fromLogin;
 
-  const OnboardFinish({super.key, required this.username});
+  const OnboardFinish({
+    super.key,
+    required this.username,
+    required this.fromLogin
+  });
 
   @override
   State<StatefulWidget> createState() => _OnboardFinish();
@@ -48,7 +54,8 @@ class _OnboardFinish extends State<OnboardFinish> {
                       ),
                       const SizedBox(height: 8.0),
                       customMultiLineTextWidget(
-                          label: 'You’ve completed the onboarding,you can start using',
+                          label: widget.fromLogin ? 'You’ve created your secrete PIN' :
+                          'You’ve completed the onboarding,you can start using',
                           size: 16,
                           textAlign: TextAlign.center,
                           weight: FontWeight.w400,
@@ -60,7 +67,8 @@ class _OnboardFinish extends State<OnboardFinish> {
                           context: context,
                           onClick: () {
                             Navigator.of(context).pushAndRemoveUntil(
-                                MaterialPageRoute(builder: (context) => const SignInScreen()),
+                                MaterialPageRoute(builder: (context) => widget.fromLogin ?
+                                const PinLoginScreen() : const SignInScreen()),
                                     (Route<dynamic> route) => false
                             );
                           }

@@ -16,8 +16,14 @@ import 'otp_verification_screen.dart';
 class CreatePinScreen extends StatefulWidget {
   final User user;
   final String token;
+  final bool fromLogin;
 
-  const CreatePinScreen({super.key, required this.user, required this.token});
+  const CreatePinScreen({
+    super.key,
+    required this.user,
+    required this.token,
+    required this.fromLogin
+  });
 
   @override
   State<StatefulWidget> createState() => _CreatePinScreen();
@@ -40,7 +46,17 @@ class _CreatePinScreen extends State<CreatePinScreen> {
           body: SafeArea(
               child: BlocConsumer<PinBloc, OtpVerifyState>(
                   listener: (context, state) {
-
+                    if(state.status == Status.success) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) =>
+                              OnboardFinish(
+                                username: '${widget.user.username}',
+                                fromLogin: widget.fromLogin
+                              )
+                          )
+                      );
+                    }
                   },
                   builder: (context, state) {
                     return Padding(
@@ -128,12 +144,7 @@ class _CreatePinScreen extends State<CreatePinScreen> {
                                   context: context,
                                   onClick: () {
                                     if(state.hasCompleteOTP) {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(builder: (context) =>
-                                              OnboardFinish(username: '${widget.user.username}')
-                                          )
-                                      );
+                                      context.read<PinBloc>().add(CreatePin());
                                     }
                                   }
                               ),
