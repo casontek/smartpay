@@ -30,8 +30,11 @@ class LoginState extends Equatable {
   }) {
     return LoginState(
       email: email ?? this.email,
+      message: message ?? this.message,
       password: password ?? this.password,
-      status: status ?? this.status
+      status: status ?? this.status,
+      user: user ?? this.user,
+      token: token ?? this.token
     );
   }
 
