@@ -27,23 +27,26 @@ class _NewPasswordScreen extends State<NewPasswordScreen> {
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        GestureDetector(
-                            onTap: () => Navigator.pop(context),
-                            child: Container(
-                              width: 40.0,
-                              height: 40.0,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                  border: Border.fromBorderSide(BorderSide(
-                                      color: Theme.of(context).colorScheme.outline,
-                                      width: 1.0
-                                  ))
-                              ),
-                              child: Icon(
-                                  Icons.arrow_back_ios_rounded,
-                                  color: Theme.of(context).colorScheme.primary
-                              ),
+                        Padding(
+                            padding: const EdgeInsets.only(top: 24.0),
+                            child: GestureDetector(
+                                onTap: () => Navigator.pop(context),
+                                child: Container(
+                                  width: 40.0,
+                                  height: 40.0,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12.0),
+                                      border: Border.fromBorderSide(BorderSide(
+                                          color: Theme.of(context).colorScheme.outline,
+                                          width: 1.0
+                                      ))
+                                  ),
+                                  child: Icon(
+                                      Icons.arrow_back_ios_rounded,
+                                      color: Theme.of(context).colorScheme.primary
+                                  ),
+                                )
                             )
                         ),
                         const SizedBox(height: 24.0),

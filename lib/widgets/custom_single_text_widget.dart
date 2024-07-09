@@ -26,7 +26,8 @@ Widget customMultiLineTextWidget({
   required String label,
   required double size,
   required FontWeight weight,
-  required Color textColor
+  required Color textColor,
+  TextAlign textAlign = TextAlign.start
 }) {
   return Text(
     label,
@@ -36,8 +37,8 @@ Widget customMultiLineTextWidget({
         fontWeight: weight,
         color: textColor
     ),
-    maxLines: 2,
-    textAlign: TextAlign.start,
+    maxLines: 3,
+    textAlign: textAlign,
     overflow: TextOverflow.ellipsis,
   );
 }

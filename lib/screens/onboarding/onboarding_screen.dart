@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:smartpaymobile/screens/auth/sign_in_screen.dart';
 import 'package:smartpaymobile/widgets/custom_button_widget.dart';
 import 'package:smartpaymobile/widgets/text_button_widget.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../services/sqlite_service.dart';
 
@@ -122,13 +123,13 @@ class _OnBoardingScreen extends State<OnBoardingScreen> {
                   children: [
                     Padding(
                         padding: const EdgeInsets.only(bottom: 34.0),
-                        child: Container(
-                          width: 42,
-                          height: 6,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5.0),
-                            color: Theme.of(context).colorScheme.primary
-                          ),
+                        child: SmoothPageIndicator(
+                            controller: _pageController,
+                            effect: ExpandingDotsEffect(
+                              activeDotColor: Theme.of(context).colorScheme.primary,
+                              dotColor: const Color(0XFFE5E7EB)
+                            ),
+                            count: 2
                         )
                     ),
                     customButtonWidget(

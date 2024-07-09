@@ -18,6 +18,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
     on<PasswordChange>((event, emit) => emit(state.copyWith(password: event.password)));
 
+    on<ResetStatus>((event, emit) => emit(state.copyWith(status: Status.initial)));
+
     on<UserLogin>((event, emit) async {
       //login user
       emit(state.copyWith(status: Status.loading));
@@ -54,5 +56,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       }
     });
   }
+
 
 }

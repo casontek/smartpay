@@ -13,7 +13,15 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
       //checks if the user has been onboarded
       final hasOnBoarded = await sqlService.isOnBoarded();
       if(hasOnBoarded == true) {
-        emit(state.copyWith(appState: AppState.onBoarded));
+        //checks if user has logged in
+        final user = await sqlService.getUser();
+        print('@@@@@@@@@@@@@@@@@@@@@@ USER: ${user?.toJson()}');
+        if(user != null) {
+          emit(state.copyWith(appState: AppState.logged));
+        }
+        else {
+          emit(state.copyWith(appState: AppState.onBoarded));
+        }
       }
       else {
         emit(state.copyWith(appState: AppState.notOnBoarded));

@@ -35,7 +35,11 @@ class FillBloc extends Bloc<FillEvent, FillState> {
 
       final result = await apiService.registerProfile(body);
       if(result.status == NetworkStatus.success) {
-        emit(state.copyWith(status: Status.success));
+        emit(state.copyWith(
+            status: Status.success,
+            user: result.data?.user,
+            token: result.data?.token
+        ));
       }
       else {
         emit(state.copyWith(

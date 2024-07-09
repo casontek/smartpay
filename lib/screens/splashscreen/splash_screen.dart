@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smartpaymobile/bloc/splash_bloc/splash_bloc.dart';
 import 'package:smartpaymobile/bloc/splash_bloc/splash_event.dart';
 import 'package:smartpaymobile/bloc/splash_bloc/splash_state.dart';
+import 'package:smartpaymobile/screens/auth/pin_login_screen.dart';
 import 'package:smartpaymobile/screens/auth/sign_in_screen.dart';
 import 'package:smartpaymobile/screens/onboarding/onboarding_screen.dart';
 
@@ -44,10 +45,13 @@ class _SplashScreen extends State<ProviderSplashScreen> {
         body: BlocConsumer<SplashBloc, SplashState>(
             listener: (context, state) {
               if(state.appState == AppState.onBoarded) {
-                navigate(true);
+                navigate('login');
               }
               else if(state.appState == AppState.notOnBoarded) {
-                navigate(false);
+                navigate('onboard');
+              }
+              else if(state.appState == AppState.logged) {
+                navigate('pin');
               }
             },
             builder: (context, state) {
@@ -94,12 +98,12 @@ class _SplashScreen extends State<ProviderSplashScreen> {
     );
   }
 
-  void navigate(bool onBoarded) {
+  void navigate(String type) {
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-            builder: (context) => onBoarded ? const SignInScreen() :
-            const OnBoardingScreen())
+            builder: (context) => type == 'login' ? const SignInScreen() :
+            type == 'pin' ? const PinLoginScreen() : const OnBoardingScreen())
     );
   }
 

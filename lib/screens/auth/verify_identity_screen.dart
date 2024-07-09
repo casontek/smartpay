@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:smartpaymobile/screens/auth/new_password_screen.dart';
 import 'package:smartpaymobile/screens/detail/id_fill_screen.dart';
 
 import '../../widgets/custom_button_widget.dart';
@@ -139,6 +140,11 @@ class _VerifyIdentityScreen extends State<VerifyIdentityScreen> {
                       label: 'Continue',
                       context: context,
                       onClick: () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) =>
+                             const NewPasswordScreen())
+                        );
                       }
                   )
               )

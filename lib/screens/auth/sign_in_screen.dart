@@ -6,6 +6,7 @@ import 'package:smartpaymobile/bloc/login_bloc/login_event.dart';
 import 'package:smartpaymobile/bloc/login_bloc/login_state.dart';
 import 'package:smartpaymobile/screens/auth/forgot_password_screen.dart';
 import 'package:smartpaymobile/screens/auth/sign_up_screen.dart';
+import 'package:smartpaymobile/screens/home/home_screen.dart';
 import 'package:smartpaymobile/utils/constants.dart';
 import 'package:smartpaymobile/widgets/custom_button_widget.dart';
 import 'package:smartpaymobile/widgets/custom_single_text_widget.dart';
@@ -39,9 +40,16 @@ class _SignInScreen extends State<SignInScreen> {
                     textColor: Colors.white,
                     context: context
                 );
+                context.read<LoginBloc>().add(ResetStatus());
               }
               else if(state.status == Status.success) {
-
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) =>
+                        HomeScreen(
+                            user: state.user!,
+                            token: state.token
+                    )));
               }
             },
             builder: (context, state) {
@@ -173,7 +181,7 @@ class _SignInScreen extends State<SignInScreen> {
                                           label: 'Forgot Password?',
                                           context: context,
                                           onClick: () {
-                                            Navigator.pushReplacement(
+                                            Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) => const ForgotPasswordScreen())

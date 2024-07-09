@@ -1,15 +1,17 @@
 
 import 'package:bloc/bloc.dart';
 
+import '../../services/sqlite_service.dart';
 import '../../utils/app_status.dart';
 import '../otp_verification_bloc/otp_verify_event.dart';
 import '../otp_verification_bloc/otp_verify_state.dart';
 
 class PinBloc extends Bloc<OtpVerifyEvent, OtpVerifyState> {
+  final sqlService = SQLiteService();
 
   PinBloc() : super(const OtpVerifyState()) {
 
-    on<KeySelection>((event, emit) {
+    on<KeySelection>((event, emit) async {
       Map<int, String> keyCodes = Map.from(state.otpCodes);
       int index = state.selectedBox;
       keyCodes[index] = event.keyCode;
@@ -26,6 +28,32 @@ class PinBloc extends Bloc<OtpVerifyEvent, OtpVerifyState> {
           selectedBox: state.selectedBox < 5 ? (state.selectedBox + 1) : state.selectedBox,
           hasCompleteOTP: completeCode
       ));
+
+      //perform login if pin has completed and is PIN Login
+      if(completeCode && event.isLogin == true) {
+        emit(state.copyWith(status: Status.loading));
+        String concatenatedPIN = state.otpCodes.values.join('');
+        print('@@@@@@@@@@@@@@@@@@@@@@ ENTERED PIN: $concatenatedPIN');
+
+        final userPin = await sqlService.getPIN();
+        print('@@@@@@@@@@@@@@@@@@@@@@ SAVED PIN: $userPin');
+
+        if(userPin == concatenatedPIN) {
+          final user = await sqlService.getUser();
+          final token = await sqlService.getToken();
+          emit(state.copyWith(
+              user: user,
+              token: token,
+              status: Status.success
+          ));
+        }
+        else {
+          emit(state.copyWith(
+              status: Status.failed,
+              message: 'incorrect pin.'
+          ));
+        }
+      }
     });
 
     on<KeyDeletion>((event, emit) {
@@ -41,9 +69,37 @@ class PinBloc extends Bloc<OtpVerifyEvent, OtpVerifyState> {
     on<CreatePin>((event, emit) async {
       emit(state.copyWith(status: Status.loading));
       String concatenatedPIN = state.otpCodes.values.join('');
-
-
+      print('@@@@@@@@@@@@@@@@ MY PIN: $concatenatedPIN');
+      await sqlService.savePIN(concatenatedPIN);
     });
+
+    on<PinLogin>((event, emit) async {
+      emit(state.copyWith(status: Status.loading));
+      String concatenatedPIN = state.otpCodes.values.join('');
+      print('@@@@@@@@@@@@@@@@@@@@@@ ENTERED PIN: $concatenatedPIN');
+
+      final userPin = await sqlService.getPIN();
+      print('@@@@@@@@@@@@@@@@@@@@@@ SAVED PIN: $userPin');
+
+      if(userPin == concatenatedPIN) {
+        final user = await sqlService.getUser();
+        final token = await sqlService.getToken();
+        emit(state.copyWith(
+          user: user,
+          token: token,
+          status: Status.success
+        ));
+      }
+      else {
+        emit(state.copyWith(
+          status: Status.failed,
+          message: 'incorrect pin.'
+        ));
+      }
+    });
+
+    on<StatusReset>((event, emit) => emit(state.copyWith(status: Status.initial)));
+
   }
 
 }

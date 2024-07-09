@@ -5,11 +5,19 @@ abstract class OtpVerifyEvent extends Equatable {}
 
 class KeySelection extends OtpVerifyEvent {
   final String keyCode;
+  final bool isLogin;
 
-  KeySelection(this.keyCode);
+  KeySelection(this.keyCode, {this.isLogin = false});
 
   @override
-  List<Object?> get props => [keyCode];
+  List<Object?> get props => [keyCode, isLogin];
+
+}
+
+class StatusReset extends OtpVerifyEvent {
+
+  @override
+  List<Object?> get props => [];
 
 }
 
@@ -44,4 +52,10 @@ class CreatePin extends OtpVerifyEvent {
   @override
   List<Object?> get props => [];
 
+}
+
+class PinLogin extends OtpVerifyEvent {
+
+  @override
+  List<Object?> get props => [];
 }

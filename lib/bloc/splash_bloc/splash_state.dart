@@ -22,5 +22,6 @@ class SplashState extends Equatable {
 enum AppState {
   loading,
   notOnBoarded,
-  onBoarded
+  onBoarded,
+  logged
 }

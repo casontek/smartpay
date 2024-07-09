@@ -121,12 +121,14 @@ class _CreatePinScreen extends State<CreatePinScreen> {
                                   isLoading: state.status == Status.loading,
                                   context: context,
                                   onClick: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(builder: (context) =>
-                                            OnboardFinish(username: '${widget.user.username}')
-                                        )
-                                    );
+                                    if(state.hasCompleteOTP) {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(builder: (context) =>
+                                              OnboardFinish(username: '${widget.user.username}')
+                                          )
+                                      );
+                                    }
                                   }
                               ),
                               const SizedBox(height: 36.0),
