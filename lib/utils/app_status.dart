@@ -4,5 +4,6 @@ enum Status {
   initial,
   loading,
   success,
-  failed
+  failed,
+  createPIN
 }

@@ -35,8 +35,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           await sqlService.saveToken(token);
           await sqlService.saveUser(user);
 
+          final pin = await sqlService.getPIN();
           emit(state.copyWith(
-              status: Status.success,
+              status: pin == null ? Status.createPIN : Status.success,
               token: token,
               user: user
           ));

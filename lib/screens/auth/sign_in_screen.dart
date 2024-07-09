@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smartpaymobile/bloc/login_bloc/login_bloc.dart';
 import 'package:smartpaymobile/bloc/login_bloc/login_event.dart';
 import 'package:smartpaymobile/bloc/login_bloc/login_state.dart';
+import 'package:smartpaymobile/screens/auth/create_pin_screen.dart';
 import 'package:smartpaymobile/screens/auth/forgot_password_screen.dart';
 import 'package:smartpaymobile/screens/auth/sign_up_screen.dart';
 import 'package:smartpaymobile/screens/home/home_screen.dart';
@@ -56,6 +57,15 @@ class _SignInScreen extends State<SignInScreen> {
                             user: state.user!,
                             token: state.token
                     )));
+              }
+              else if(state.status == Status.createPIN) {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) =>
+                        CreatePinScreen(
+                            user: state.user!,
+                            token: state.token
+                        )));
               }
             },
             builder: (context, state) {
