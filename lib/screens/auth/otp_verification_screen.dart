@@ -282,17 +282,24 @@ Widget keyWidget({
     height: 56.0,
     alignment: Alignment.center,
     child: InkWell(
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
       onTap: () => onClicked(keyCode),
       child: keyCode == '12' ? Icon(
           Icons.backspace_outlined,
           color: Theme.of(context).colorScheme.primary
       ) :
-      customSingleTextWidget(
-          label: keyCode == '10' ? '*' : keyCode == '11' ? '0' : keyCode,
-          size: 24,
-          weight: FontWeight.w500,
-          textColor: Theme.of(context).colorScheme.primary
-      )
+          Container(
+            width: 32,
+            height: 32,
+            alignment: Alignment.center,
+            child: customSingleTextWidget(
+                label: keyCode == '10' ? '*' : keyCode == '11' ? '0' : keyCode,
+                size: 24,
+                weight: FontWeight.w500,
+                textColor: Theme.of(context).colorScheme.primary
+            )
+          )
     ),
   );
 }
